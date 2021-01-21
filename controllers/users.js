@@ -18,7 +18,6 @@ module.exports.getUserById = (req, res, next) => {
     .catch(next);
 };
 
-
 module.exports.createUser = (req, res, next) => {
   const { password, email, name } = req.body;
   bcrypt.hash(password, 10).then((hashPassword) => {
@@ -33,16 +32,13 @@ module.exports.createUser = (req, res, next) => {
       });
   });
 };
- 
 
 module.exports.login = (req, res, next) => {
   const { password, email } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id },JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(next);
 };
-
-

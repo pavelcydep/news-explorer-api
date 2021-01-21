@@ -1,7 +1,7 @@
 const routerArticles = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const {
-  findArticles,createArticles, deleteArticles
+  findArticles, createArticles, deleteArticles,
 } = require('../controllers/articles');
 
 routerArticles.get('/', findArticles);
@@ -25,4 +25,3 @@ routerArticles.delete('/:id', celebrate({
 }), deleteArticles);
 
 module.exports = routerArticles;
-
