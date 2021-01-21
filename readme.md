@@ -1,6 +1,9 @@
-# Бэкэнд  для проекта news
 
-Ссылка на api: https://api.belich.students.nomoreparties.xyz
+
+
+# Бэкэнд проекта news
+
+
 
 
 ## Роуты: 
