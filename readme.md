@@ -1,6 +1,6 @@
 # Бэкэнд проекта news
 
-Ссылка на api: https://api.belich.students.nomoreparties.xyz
+Ссылка на api:http://www.api.pavlov-news.students.nomoreparties.xyz
 
 
 ## Роуты: 
