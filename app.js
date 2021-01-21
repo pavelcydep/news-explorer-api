@@ -1,7 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-// eslint-disable-next-line no-unused-vars
-const escape = require('escape-html');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -11,7 +9,7 @@ const CustomError = require('./errors/customError');
 const routerUsers = require('./routes/users');
 const routerArticles = require('./routes/articles');
 
-const { PORT = 4000 } = process.env;
+const { PORT = 3000 } = process.env;
 const app = express();
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -47,13 +45,11 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-
-
 app.use('/articles', celebrate({
   headers: Joi.object().keys({
     authorization: Joi.string().required(),
   }).unknown(true),
-}), auth, routerArticles );
+}), auth, routerArticles);
 app.use('/users', celebrate({
   headers: Joi.object().keys({
     authorization: Joi.string().required(),
