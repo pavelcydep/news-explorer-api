@@ -3,22 +3,15 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const rateLimit = require('express-rate-limit');
-const { celebrate, Joi, errors } = require('celebrate');
+const { errors } = require('celebrate');
 const CustomError = require('./errors/customError');
-const routerUsers = require('./routes/users');
-const routerArticles = require('./routes/articles');
+const router = require('./routes/routerIndex');
 
 const { PORT = 3000 } = process.env;
 const app = express();
-const { createUser, login } = require('./controllers/users');
-const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
+const errorHandler = require('./middlewares/errorHandler');
+const { limiter } = require('./middlewares/limiter');
 
 app.use(helmet());
 app.use(limiter);
@@ -32,46 +25,15 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger);
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
-}), createUser);
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
-}), login);
 
-app.use('/articles', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(true),
-}), auth, routerArticles);
-app.use('/users', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(true),
-}), auth, routerUsers);
-app.use(errorLogger);
+app.use('/', router);
 app.use(() => {
   throw new CustomError(404, 'Запрашиваемый ресурс не найден');
 });
-app.use(errors());
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
+app.use(errorLogger);
 
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
-});
+app.use(errors());
+app.use(errorHandler);
 
 app.listen(PORT, () => {
 });
