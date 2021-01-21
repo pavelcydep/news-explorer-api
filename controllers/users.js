@@ -3,38 +3,26 @@ const jwt = require('jsonwebtoken');
 const CustomError = require('../errors/customError');
 const User = require('../models/user');
 
-const { JWT_SECRET = 'dev-key' } = process.env;
-module.exports.findUser = (req, res, next) => {
-  User.find({})
-    .then((user) => res.send({ data: user }))
-    .catch(next);
-};
+let JWT_SECRET;
+
+if (process.env.NODE_ENV !== 'production') {
+  JWT_SECRET = process.env.JWT_SECRET ? process.env.JWT_SECRET : 'dev-key';
+} else {
+  JWT_SECRET = process.env.JWT_SECRET;
+}
 
 module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.id)
+  User.findById(req.user._id)
     .orFail(new CustomError(404, 'Данный пользователь не найден'))
-    .then((user) => {
-      res.send({ data: user });
-    })
+    .then((user) => res.status(200).send(user))
     .catch(next);
 };
 
-module.exports.patchUser = (req, res, next) => {
-  const { name, about } = req.body;
-  User.findOneAndUpdate({ _id: req.user._id }, { name, about }, {
-    new: true,
-    runValidators: true,
-    upsert: false,
-  })
-    .orFail(new CustomError(404, 'Данный пользователь не найден'))
-    .then((user) => res.send({ data: user }))
-    .catch(next);
-};
 
 module.exports.createUser = (req, res, next) => {
-  const { password, email } = req.body;
+  const { password, email, name } = req.body;
   bcrypt.hash(password, 10).then((hashPassword) => {
-    User.create({ password: hashPassword, email })
+    User.create({ password: hashPassword, email, name })
       .then((user) => res.status(200).send({ _id: user._id }))
       .catch((err) => {
         if (err.code === 11000) {
@@ -57,14 +45,4 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.patchUserAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  User.findOneAndUpdate({ _id: req.user._id }, { avatar }, {
-    new: true,
-    runValidators: true,
-    upsert: false,
-  })
-    .orFail(new CustomError(404, 'Данный пользователь не найден'))
-    .then((user) => res.status(200).send(user))
-    .catch(next);
-};
+

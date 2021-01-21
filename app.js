@@ -9,9 +9,9 @@ const rateLimit = require('express-rate-limit');
 const { celebrate, Joi, errors } = require('celebrate');
 const CustomError = require('./errors/customError');
 const routerUsers = require('./routes/users');
-const routerCards = require('./routes/cards');
+const routerArticles = require('./routes/articles');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 const app = express();
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -47,13 +47,14 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-app.use('/', celebrate({
+
+
+app.use('/articles', celebrate({
   headers: Joi.object().keys({
     authorization: Joi.string().required(),
   }).unknown(true),
-}), auth, routerCards);
-
-app.use('/', celebrate({
+}), auth, routerArticles );
+app.use('/users', celebrate({
   headers: Joi.object().keys({
     authorization: Joi.string().required(),
   }).unknown(true),
