@@ -1,5 +1,5 @@
 require('dotenv').config();
-const cors = require('cors');
+
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-app.options('*',cors());
+
 app.use(requestLogger);
 
 app.use('/', router);
