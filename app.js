@@ -12,7 +12,23 @@ const app = express();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const { limiter } = require('./middlewares/limiter');
+const corsOptions = {
+  origin: [
+        'http://localhost:8080/',
+        'http://pavlov-news.students.nomoreparties.xyz',
+        'http://pavlov-news.students.nomoreparties.xyz',
+        'http://api.pavlov-news.students.nomoreparties.xyz',
+        'https://api.pavlov-news.students.nomoreparties.xyz',
 
+        'http://pavelcydep.github.io/New-Explorer__frontend/',
+        'https://pavelcydep.github.io/New-Explorer__frontend/'
+],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'x-requested-with', 'origin','Access-Control-Allow-Origin', 'accept', 'x-access-token', 'Authorization'],
+  credentials: true,
+};
 app.use(helmet());
 app.use(limiter);
 app.use(bodyParser.json());
