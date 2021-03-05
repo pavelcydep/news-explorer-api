@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
@@ -6,7 +7,6 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const CustomError = require('./errors/customError');
 const router = require('./routes/routerIndex');
-
 const { PORT = 3000 } = process.env;
 const app = express();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-
+app.options('*',cors());
 app.use(requestLogger);
 
 app.use('/', router);
