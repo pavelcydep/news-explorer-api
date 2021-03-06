@@ -19,8 +19,8 @@ const corsOptions = {
         'http://api.pavlov-news.students.nomoreparties.xyz',
         'https://api.pavlov-news.students.nomoreparties.xyz',
 
-        'http://pavelcydep.github.io/New-Explorer__frontend/',
-        'https://pavelcydep.github.io/New-Explorer__frontend/'
+        'http://pavelcydep.github.io',
+        'https://pavelcydep.github.io'
 ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
