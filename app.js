@@ -29,7 +29,7 @@ const corsOptions = {
   credentials: true,
 };
 const app = express();
-app.options('*',cors());
+
 app.use(cors(corsOptions));
 app.use(helmet());
 app.use(limiter);
