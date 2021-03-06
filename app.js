@@ -7,12 +7,12 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const CustomError = require('./errors/customError');
 const router = require('./routes/routerIndex');
-const { PORT = 3000 } = process.env;
-const app = express();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const { limiter } = require('./middlewares/limiter');
-
+const { PORT = 3000 } = process.env;
+const app = express();
+app.use(cors());
 app.use(helmet());
 app.use(limiter);
 app.use(bodyParser.json());
@@ -24,7 +24,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.use(cors());
 app.use(requestLogger);
 
 app.use('/', router);
