@@ -26,11 +26,8 @@ router.use('/articles', celebrate({
   }).unknown(true),
 }), auth, articles);
 
-router.use('/users', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(true),
-}), auth, users);
+router.use('/users',
+   users);
 
 module.exports = router;
 
