@@ -1,23 +1,28 @@
-
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config');
 
+const { JWT_SECRET = 'dev-key' } = process.env;
+// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
-  if (!req.cookies.jwt) 
-  {
+  const { authorization } = req.headers;
+
+  if (!authorization || !authorization.startsWith('Bearer ')) {
     return res
       .status(401)
       .send({ message: 'Необходима авторизация' });
   }
+
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
-    payload = jwt.verify(req.cookies.jwt, JWT_SECRET);
-  } catch (e) {
+    payload = jwt.verify(token, JWT_SECRET);
+  } catch (err) {
     return res
-    .status(401)
-    .send({ message: 'Необходима авторизация' });
+      .status(401)
+      .send({ message: 'Необходима авторизация' });
   }
+
   req.user = payload;
+
   next();
 };
