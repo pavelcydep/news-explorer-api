@@ -33,12 +33,23 @@ module.exports.createUser = (req, res, next) => {
   });
 };
 
+
 module.exports.login = (req, res, next) => {
-  const { password, email } = req.body;
+  const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      res.send({ token });
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET);
+      res.cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
+        sameSite: true
+      });
+      res.send({ message: 'Успешная авторизация' });
     })
     .catch(next);
 };
+
+
+
+
+
