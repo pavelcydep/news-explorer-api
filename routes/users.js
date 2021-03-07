@@ -7,3 +7,5 @@ const {
 routerUsers.get('/me', getUserById);
 
 module.exports = routerUsers;
+
+
