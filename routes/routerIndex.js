@@ -38,3 +38,4 @@ router.use('/users', celebrate({
 }), auth, users);
 
 module.exports = router;
+

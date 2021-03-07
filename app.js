@@ -1,22 +1,42 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const CustomError = require('./errors/customError');
 const router = require('./routes/routerIndex');
-
-const { PORT = 3000 } = process.env;
-const app = express();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const { limiter } = require('./middlewares/limiter');
+const { PORT = 3000 } = process.env;
+const corsOptions = {
+  origin: [
+        'http://localhost:8080/',
+        'http://pavlov-news.students.nomoreparties.xyz',
+        'https://pavlov-news.students.nomoreparties.xyz',
+        'http://api.pavlov-news.students.nomoreparties.xyz',
+        'https://api.pavlov-news.students.nomoreparties.xyz',
 
+        'http://pavelcydep.github.io',
+        'https://pavelcydep.github.io'
+],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
+  allowedHeaders: ['Content-Type', 'x-requested-with', 'origin','Access-Control-Allow-Origin', 'accept', 'x-access-token', 'Authorization'],
+  credentials: true,
+};
+const app = express();
+
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
