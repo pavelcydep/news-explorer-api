@@ -20,14 +20,10 @@ router.post('/signup', celebrate({
   }),
 }), createUser);
 
-router.use('/articles', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(true),
-}), auth, articles);
+router.use('/articles',  auth, articles);
 
-router.use('/users',
-   users);
+router.use('/users', auth, users);
+
 
 module.exports = router;
 
