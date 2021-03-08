@@ -4,7 +4,7 @@ const {
   getUserById,
 } = require('../controllers/users');
 
-routerUsers.get('/me', getUserById);
+routerUsers.get('/me',auth, getUserById);
 
 module.exports = routerUsers;
 
