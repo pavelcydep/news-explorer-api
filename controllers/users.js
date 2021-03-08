@@ -18,21 +18,18 @@ module.exports.getUserById = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.createUser = (req, res, next) => {
-  const { password, email, name } = req.body;
-  bcrypt.hash(password, 10).then((hashPassword) => {
-    User.create({ password: hashPassword, email, name })
-      .then((user) => res.status(200).send({ _id: user._id }))
-      .catch((err) => {
-        if (err.code === 11000) {
-          next(new CustomError(409, err.message));
-        } else {
-          next(new CustomError(400, err.message));
-        }
-      });
-  });
-};
 
+module.exports.createUser = (req, res, next) => {
+  const { name, email } = req.body;
+  bcrypt.hash(req.body.password, 10)
+    .then((hash) => User.create({ name, email, password: hash }))
+    .then((user) => res.status(201).send({
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    }))
+    .catch(next);
+};
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
