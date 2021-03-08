@@ -23,7 +23,7 @@ router.post('/signup', celebrate({
 router.use('/articles',  auth, articles);
 
 router.use('/users', users);
-
+router.use('/users/me',auth, users);
 
 module.exports = router;
 
