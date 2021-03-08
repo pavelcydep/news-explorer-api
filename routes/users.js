@@ -1,5 +1,5 @@
 const routerUsers = require('express').Router();
-
+const auth = require('../middlewares/auth');
 const {
   getUserById,
 } = require('../controllers/users');
