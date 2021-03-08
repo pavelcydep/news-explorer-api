@@ -26,7 +26,7 @@ const corsOptions = {
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 200,
-  allowedHeaders: ['Content-Type', 'x-requested-with', 'origin','Access-Control-Allow-Origin', 'accept', 'x-access-token', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'x-requested-with', 'origin','Access-Control-Allow-Origin','Access-Control-Allow-Credentials', 'accept', 'x-access-token', 'Authorization'],
   credentials: true,
 };
 const app = express();
