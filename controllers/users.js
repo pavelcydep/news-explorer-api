@@ -44,7 +44,8 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         sameSite: true
       });
-      res.send({ message: 'Успешная авторизация' });
+     res.send({ message: 'Успешная авторизация' });
+     res.clearCookie('jwt', token); 
     })
     .catch(next);
 };
