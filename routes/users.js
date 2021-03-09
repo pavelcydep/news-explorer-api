@@ -1,18 +1,10 @@
 
+const routerUsers = require('express').Router();
 
-const router = require('express').Router();
-const { getUserById, createUser, login } = require('../controllers/users');
-const auth = require('../middlewars/auth');
+const {
+  getUserById,
+} = require('../controllers/users');
 
-
-
-router.get('/users/me', auth, getUserById);
-
-
-
-router.post('/signup',  createUser);
-router.post('/signin',  login);
+routerUsers.get('/me', getUserById);
 
 module.exports = routerUsers;
-
-
