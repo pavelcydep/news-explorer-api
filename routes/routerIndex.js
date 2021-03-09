@@ -12,20 +12,10 @@ const {
 
 router.post('/signin', login);
 
-router.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().min(3),
-    password: Joi.string().required().min(3),
-    name: Joi.string().required().min(2),
-  }),
-}), createUser);
+router.post('/signup',createUser);
 
 router.use('/articles',  auth, articles);
 
-router.use('/users', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(true),
-}), auth, users);
+router.use('/users', users);
 
 module.exports = router;
