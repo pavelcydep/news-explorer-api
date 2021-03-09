@@ -4,8 +4,8 @@ const {
   getUserById,
 } = require('../controllers/users');
 
-routerUsers.get('/', getUserById);
-
+const auth = require('../middlewars/auth');
+routerUsers.get('/users/me', auth, getUserById);
 module.exports = routerUsers;
 
 
