@@ -47,7 +47,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(requestLogger);
 
-app.use('/', router);
+app.use(require('./routes/index'));
 app.use(() => {
   throw new CustomError(404, 'Запрашиваемый ресурс не найден');
 });
