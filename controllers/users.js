@@ -38,8 +38,9 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET);
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
-       
-        sameSite: false
+       sameSite: 'none',
+        secure: true
+        
       });
      res.send({ message: 'Успешная авторизация' });
     
