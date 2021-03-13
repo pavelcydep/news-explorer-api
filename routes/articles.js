@@ -14,7 +14,7 @@ routerArticles.post('/', celebrate({
     date: Joi.string().required().min(2),
     source: Joi.string().required().min(2),
     link: Joi.string().required().pattern(/^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/),
-    image: Joi.string().required().pattern(/^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/),
+    image: Joi.string().required().pattern(/^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/)
   }),
 }), createArticles);
 
