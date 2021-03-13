@@ -22,6 +22,9 @@ module.exports.createArticles = (req, res, next) => {
         });
     }).catch((err) => next(new CustomError(400, err.message)));
 };
+
+
+
 module.exports.deleteArticles = (req, res, next) => {
   Article.findById(req.params.id).populate(['owner'])
     .orFail(new CustomError(404, 'Данного id нет в базе'))
