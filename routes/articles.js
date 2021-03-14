@@ -8,21 +8,20 @@ routerArticles.get('/', findArticles);
 
 routerArticles.post('/', celebrate({
   body: Joi.object().keys({
-    keyword: Joi.string().required(),
-    title: Joi.string().required(),
-    text: Joi.string().required(),
-    date: Joi.string().required(),
-    source: Joi.string().required(),
-    link: Joi.string().required(),
-    image: Joi.string().required()
-  })
+    keyword: Joi.string().required().min(2),
+    title: Joi.string().required().min(2),
+    text: Joi.string().required().min(2),
+    date: Joi.string().required().min(2),
+    source: Joi.string().required().min(2),
+    link: Joi.string().required().pattern(/^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/),
+    image: Joi.string().required().pattern(/^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/),
+  }),
 }), createArticles);
 
 routerArticles.delete('/:id', celebrate({
-  body: Joi.object().keys({
+  params: Joi.object().keys({
     id: Joi.string().hex().required().length(24),
   }),
 }), deleteArticles);
-
 
 module.exports = routerArticles;
