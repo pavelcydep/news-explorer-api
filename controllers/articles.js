@@ -37,7 +37,7 @@ module.exports.createArticles = (req, res, next) => {
       link: article.link,
       image: article.image
     }))
-    .catch(next);
+   .catch((err) => next(new CustomError(400, err.message)));
 };
 
 module.exports.deleteArticles = (req, res, next) => {
