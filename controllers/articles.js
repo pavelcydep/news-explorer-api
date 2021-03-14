@@ -35,7 +35,7 @@ module.exports.createArticles = (req, res, next) => {
 module.exports.deleteArticle = (req, res, next) => {
   Article.findById(req.params.id)
     .select('+owner')
- 
+ .orFail(new CustomError(404, 'Данного id нет в базе'))
     .then((article) => {
       if (article.owner.toString() === req.user._id) {
         Article.deleteOne({ _id: req.params.id })
