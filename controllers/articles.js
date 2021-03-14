@@ -32,7 +32,7 @@ module.exports.createArticles = (req, res, next) => {
 
 
 
-module.exports.deleteArticle = (req, res, next) => {
+module.exports.deleteArticles = (req, res, next) => {
   Article.findById(req.params.id)
     .select('+owner')
  .orFail(new CustomError(404, 'Данного id нет в базе'))
