@@ -35,14 +35,14 @@ module.exports.createArticles = (req, res, next) => {
 module.exports.deleteArticle = (req, res, next) => {
   Article.findById(req.params.id)
     .select('+owner')
-    .orFail()
+ 
     .then((article) => {
       if (article.owner.toString() === req.user._id) {
         Article.deleteOne({ _id: req.params.id })
           .then((articleDel) => res.send(articleDel))
           .catch(next);
       } else {
-        
+        throw new CustomError(403, 'У вас нет прав на это действие'); 
       }
     })
     .catch(next);
