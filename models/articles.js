@@ -27,26 +27,19 @@ const articleSchema = new mongoose.Schema({
   },
 
   link: {
-    type: String,
-    required: true,
-    validate: {
-      validator(v) {
-        return /^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/.test(v);
+      type: String,
+      validate: {
+        validator: (link) => validator.isURL(link),
       },
-      message: 'Указана некорректная ссылка',
+      required: true,
     },
-  },
-
-  image: {
-    type: String,
-    required: true,
-    validate: {
-      validator(v) {
-        return /^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/.test(v);
+    image: {
+      type: String,
+      validate: {
+        validator: (link) => validator.isURL(link),
       },
-      message: 'Указана некорректная ссылка',
+      required: true,
     },
-  },
 
   owner: {
     type: mongoose.Types.ObjectId,
