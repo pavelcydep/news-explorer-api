@@ -15,6 +15,7 @@ const { PORT = 3000 } = process.env;
 const corsOptions = {
   origin: [
         'http://localhost:8080',
+    'localhost:8080',
         'http://pavlov-news.students.nomoreparties.xyz',
         'https://pavlov-news.students.nomoreparties.xyz',
         'http://api.pavlov-news.students.nomoreparties.xyz',
