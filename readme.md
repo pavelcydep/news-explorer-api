@@ -1,12 +1,10 @@
 
 
-![alt text](top.png)
+
 # Бэкэнд проекта news
 
 Ссылка на api: https://api.pavlov-news.students.nomoreparties.xyz
 
-![alt tag](https://disk.yandex.ru/client/disk?idApp=client&dialog=slider&idDialog=%2Fdisk%2F%D0%93%D0%BE%D1%80%D1%8B.jpg "Описание будет тут")
-![alt text](https://disk.yandex.ru/client/disk?idApp=client&dialog=slider&idDialog=%2Fdisk%2F%D0%93%D0%BE%D1%80%D1%8B.jpg )
 
 ## Роуты: 
 ### создаёт пользователя с переданными в теле email, password и name
