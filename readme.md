@@ -1,6 +1,6 @@
 
 
-![alt text](news-explorer-api/top.png "Описание будет тут")
+![alt text](top.png)
 # Бэкэнд проекта news
 
 Ссылка на api: https://api.pavlov-news.students.nomoreparties.xyz
