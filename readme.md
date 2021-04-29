@@ -1,6 +1,6 @@
 
 
-![alt text]( "Описание будет тут")
+![alt text](Снимок экрана от 2021-04-29 08-55-11.png "Описание будет тут")
 # Бэкэнд проекта news
 
 Ссылка на api: https://api.pavlov-news.students.nomoreparties.xyz
