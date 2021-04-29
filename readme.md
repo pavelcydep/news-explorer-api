@@ -4,7 +4,7 @@
 # Бэкэнд проекта news
 
 Ссылка на api: https://api.pavlov-news.students.nomoreparties.xyz
-![alt tag](http://domain.com/path/to/img.png "Описание будет тут")​
+![alt tag](http://domain.com/path/to/img.png "Описание будет тут")
 
 
 ## Роуты: 
