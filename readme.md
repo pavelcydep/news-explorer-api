@@ -1,7 +1,9 @@
 
 
 
-# Бэкэнд проекта news
+# Бэкэнд проекта News Exploler
+
+![]()
 
 Ссылка на api: https://api.pavlov-news.students.nomoreparties.xyz
 
