@@ -30,13 +30,34 @@ POST /articles
 ### удаляет сохранённую статью  по _id
 DELETE /articles/articleId 
 
+Как установить проект?
+================
+## Для начала работы вам необходим:
+
+- <a href="https://nodejs.org/en/">NodeJS & npm<a> - среда выполенния кода JavaScript вне браузера. Позволяет писать серверный код для динамических веб-страниц и веб-приложений.
+- <a href="https://gitforwindows.org/">Git Bash<a> если вы используете Windows OS.
+
+## Установка
+
+### Склонировать проект на ПК:
+
+    git clone https://github.com/pavelcydep/servis-mesto-api.git
+
+
+
+### Установить зависимости
+
+    npm install
+
+
+
+
+
+
 ## Технологии:
-* Express.js
-* Node.js
 
-## Запуск проекта
-Для запуска необходим файл .env
+   ![](node100.png)         ![](exp.png)             ![](mongodb.png)
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+## Планы по проекту
+Улучшить безопасность бэкэнда.
 
