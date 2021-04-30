@@ -3,7 +3,7 @@
 
 # Бэкэнд проекта News Exploler
 
-![]()
+![](bloggif_608b98d0d2acf.gif)
 
 Ссылка на api: https://api.pavlov-news.students.nomoreparties.xyz
 
